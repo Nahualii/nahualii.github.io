@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Pamela 🖤</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('fondo-dark-fantasy.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    #contador {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #ff4d6d;
+    }
+
+    .corazon {
+      font-size: 5em;
+      color: #ff4d6d;
+      position: relative;
+      z-index: 2;
+    }
+
+    #carta {
+      width: 80%;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(255, 77, 109, 0.2);
+      border-radius: 15px;
+      font-size: 1.1em;
+      color: #fff;
+      text-align: left;
+      line-height: 1.5;
+      white-space: pre-line;
+      min-height: 400px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .corazon-cae {
+      position: fixed;
+      font-size: 1.5em;
+      top: -50px;
+      z-index: 1;
+      pointer-events: none;
+      animation-name: caer;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes caer {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Mensaje inicial pantalla completa */
+    #inicio {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      cursor: pointer;
+      font-size: 1.5em;
+      text-align: center;
+      padding: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+<script>
+  // Bloqueo con contraseña
+  const password = "PYN"; // Cambialo si querés otra contraseña
+  let intento = prompt("Para ver esta página, ingresá la contraseña:");
+
+  if (intento !== password) {
+    document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Acceso denegado 🖤</h1>";
+  }
+</script>
+
+<header>
+  <h1>🖤 Pamela & Nahuel 🖤</h1>
+  <p>Han pasado</p>
+  <div id="contador"></div>
+  <div class="corazon">❤️</div>
+</header>
+
+<div id="carta"></div>
+
+<!-- Mensaje inicial para tocar y que arranque la música -->
+<div id="inicio">
+  Tocá la pantalla para escuchar nuestra canción 🖤
+</div>
+
+<!-- Música de fondo -->
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // Contador de días desde 19 septiembre 2025
+  const fechaInicio = new Date(2025, 8, 19); // 8 = septiembre
+  const contador = document.getElementById("contador");
+
+  function actualizarContador() {
+    const hoy = new Date();
+    const diferencia = hoy - fechaInicio;
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    contador.textContent = `${dias} días juntos 🖤`;
+  }
+
+  actualizarContador();
+  setInterval(actualizarContador, 1000 * 60 * 60);
+
+  // Carta con efecto máquina de escribir
+  const cartaTexto = `Pamela 🖤
+
+A veces me cuesta poner en palabras lo que siento por vos, porque lo que hay en mi corazón es demasiado grande para explicarlo. Pero quiero intentarlo, porque vos merecés leerlo y saberlo cada día.
+
+Nunca voy a olvidar ese 19 de septiembre, nuestra primera vez en el Prado. Llovía, me mojé esperándote durante media hora… pero ¿sabés qué? Valió absolutamente la pena. Porque en el momento en que te vi, supe que haría lo mismo mil veces más con tal de cruzarme con tu mirada y sentir esa paz que solo vos me das.
+
+Vos me enseñaste lo que significa el amor verdadero. Sos la primera persona que me hace sentir pleno, tranquilo, en paz… como si todo encajara en su lugar cuando estoy a tu lado. Dormir con vos, abrazarte, escucharte respirar cerca mío, es algo que no puedo describir con palabras, pero que me llena el alma.
+
+Quiero ser el primero y el último en tu vida. Quiero ser ese hombre que te cuide, que te haga reír, que te dé confianza y que te demuestre día a día que nací para amarte. Sé que hacerte la mujer más feliz del mundo es un desafío enorme, pero me siento capaz de lograrlo, porque cada latido mío late por vos.
+
+No hay molestia en tu compañía, no hay inquietud en tu presencia. Solo paz, ternura y un amor que crece más y más cada día. Vos sos mi sueño hecho realidad, y mi único deseo es seguir construyendo esta historia a tu lado, por todos los días que nos regale la vida.
+
+Te amo más de lo que las palabras pueden expresar. Y mientras este contador marque los días que llevamos juntos, yo solo voy a seguir repitiendo lo mismo en mi corazón: que cada uno de ellos, y todos los que vendrán, tienen sentido porque vos estás en ellos.
+
+Siempre tuyo,
+Nahuel 🖤`;
+
+  const cartaElemento = document.getElementById("carta");
+  let i = 0;
+
+  function escribirCarta() {
+    if (i < cartaTexto.length) {
+      cartaElemento.textContent += cartaTexto.charAt(i);
+      i++;
+      setTimeout(escribirCarta, 20);
+    }
+  }
+
+  escribirCarta();
+
+  // Crear corazones negros que caen
+  function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon-cae");
+    corazon.style.left = Math.random() * window.innerWidth + "px";
+    corazon.style.fontSize = 10 + Math.random() * 20 + "px";
+    corazon.style.animationDuration = 5 + Math.random() * 5 + "s";
+    corazon.textContent = "❤️";
+    corazon.style.color = "#000000"; // corazones negros
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+      corazon.remove();
+    }, 10000);
+  }
+
+  setInterval(crearCorazon, 500);
+
+  // Autoplay música al tocar la pantalla
+  const inicio = document.getElementById('inicio');
+  const musica = document.getElementById('musica');
+
+  inicio.addEventListener('click', () => {
+    musica.play();
+    inicio.style.display = 'none'; // Oculta el mensaje inicial
+  });
+</script>
+
+</body>
+</html>
